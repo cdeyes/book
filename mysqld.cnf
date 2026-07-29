@@ -1,0 +1,53 @@
+[mysqld]
+# 基础服务配置
+pid-file        = /run/mysqld/mysqld.pid
+socket          = /run/mysqld/mysqld.sock
+port            = 3306
+bind-address    = 192.168.1.20
+basedir         = /usr
+datadir         = /data/mysql
+tmpdir          = /tmp
+lc-messages-dir = /usr/share/mysql
+skip-external-locking
+
+# 字符集配置，兼容emoji与特殊字符
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+
+# 关闭DNS解析，提升连接速度
+skip-name-resolve
+
+# 连接数优化
+max_connections = 2000
+max_user_connections = 500
+max_connect_errors = 1000
+
+# 超时优化，释放僵尸连接
+wait_timeout = 600
+interactive_timeout = 600
+
+# 大字段数据支持
+max_allowed_packet = 64M
+
+# InnoDB性能核心调优
+innodb_buffer_pool_size = 1G
+innodb_buffer_pool_instances = 8
+innodb_read_io_threads = 64
+innodb_write_io_threads = 64
+innodb_log_buffer_size = 64M
+innodb_log_file_size = 256M
+innodb_log_files_in_group = 2
+innodb_flush_log_at_trx_commit = 1
+innodb_autoinc_lock_mode = 2
+innodb_flush_method = O_DIRECT
+
+# 慢查询日志与错误日志配置
+slow_query_log = 1
+slow_query_log_file = /data/mysql/slow.log
+long_query_time = 2
+log_queries_not_using_indexes = 1
+log_error = /data/mysql/error.log
+log_error_verbosity = 3
+
+[mysql]
+default-character-set = utf8mb4
