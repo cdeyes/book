@@ -26,7 +26,7 @@ def get_hostname() -> str:
     return socket.gethostname()
 
 def get_local_ip() -> str:
-    """获取本机内网IP（生产推荐方案）"""
+    """获取本机内网IP"""
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(("8.8.8.8", 80))
